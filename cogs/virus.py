@@ -18,7 +18,7 @@ from .utils import storage, formats
 GENERAL_ID = 706271127542038611
 SNAKE_PIT_ID = 706273466776813573
 TESTING_ID = 706301766832095312
-EVENT_ID = 674833398744743936
+EVENT_ID = 808758712394055681
 INFECTED_ROLE_ID = 808745075701710858
 HEALER_ROLE_ID = 808745162364157982
 DISCORD_PY = 706271127542038608
@@ -26,6 +26,7 @@ MOD_TESTING_ID = 568662293190148106
 MAX_ALLOWED_HEALS = 3
 MAX_VACCINE = 50
 VACCINE_MILESTONES = (5, 10, 15, 20, MAX_VACCINE)
+
 
 # GENERAL_ID = 182325885867786241
 # SNAKE_PIT_ID = 182328316676538369
@@ -43,12 +44,15 @@ def weighted_random(pairs):
         if rand <= 0:
             return value
 
-def tomorrow_date(relative=None):
+
+def tomorrow_date(relative = None):
     now = relative or datetime.datetime.utcnow()
     return datetime.datetime.combine(now.date(), datetime.time()) + datetime.timedelta(days=1)
 
+
 class VirusError(commands.CommandError):
     pass
+
 
 class UniqueCappedList(Sequence):
     def __init__(self, maxlen):
@@ -79,6 +83,7 @@ class UniqueCappedList(Sequence):
         if item not in self.data:
             self.data.append(item)
 
+
 class State(enum.Enum):
     alive = 0
     dead = 1
@@ -87,6 +92,7 @@ class State(enum.Enum):
     become_healer = 4
     reinfect = 5
     lose_healer = 6
+
 
 @dataclasses.dataclass
 class Participant:
@@ -149,7 +155,7 @@ class Participant:
 
         return items - set(self.backpack)
 
-    def infect(self, *, force=False):
+    def infect(self, *, force = False):
         if self.infected and not force:
             return False
 
@@ -166,7 +172,7 @@ class Participant:
         self.death = datetime.datetime.utcnow()
         return True
 
-    def add_sickness(self, number=None):
+    def add_sickness(self, number = None):
         """Increases sickness. If no number is passed then it randomly increases it.
 
         Returns None if already dead, False if not dead, True if became dead.
@@ -347,6 +353,7 @@ class Item:
                 self._pred(self, user) and
                 self.emoji not in user.backpack)
 
+
 @dataclasses.dataclass
 class Stats:
     infected: int = 0
@@ -366,6 +373,7 @@ class Stats:
         o['data_type'] = 3
         return o
 
+
 class VirusStorageHook(storage.StorageHook):
     @classmethod
     def from_json(cls, data):
@@ -380,6 +388,7 @@ class VirusStorageHook(storage.StorageHook):
             return Item(**data)
         elif data_type == 3:
             return Stats(**data)
+
 
 class Virus(commands.Cog):
     """The yourapps virus has spread and needs to be contained \N{FACE SCREAMING IN FEAR}
@@ -397,11 +406,7 @@ class Virus(commands.Cog):
         self._shop_restocking = False
         self._timer_has_data = asyncio.Event()
         self._task = bot.loop.create_task(self.day_cycle())
-#        self.log_channel = None
-        self.bot.loop.create_task(self.init())
-
-    async def init(self):
-        self.log_channel = await self.bot.fetch_channel(706301766832095312)
+        #        self.log_channel = None
 
     def cog_unload(self):
         self._task.cancel()
@@ -473,7 +478,7 @@ class Virus(commands.Cog):
         """Manages the virus"""
         pass
 
-    async def new_virus_day(self, guild, infected=None, healers=None, new_infected=5, new_healers=2):
+    async def new_virus_day(self, guild, infected = None, healers = None, new_infected = 5, new_healers = 2):
         infected = infected or set()
         healers = healers or set()
 
@@ -653,7 +658,7 @@ class Virus(commands.Cog):
 
         await self.storage.save()
 
-    async def apply_sickness_to_all(self, channel, sickness, *, cause=None):
+    async def apply_sickness_to_all(self, channel, sickness, *, cause = None):
         # A helper function to help apply a sickness to all
         # recent people in a channel (i.e. an area)
 
@@ -701,8 +706,8 @@ class Virus(commands.Cog):
 
         dialogue = [
             f'{ping} has been infected. {total} infected so far...',
-            f'{ping} is officially infected. Feel free to stay away from them and {total-1} more.',
-            f"Ya know, shaming someone for being sick isn't very nice. Protect {ping} and their {total-1} friends.",
+            f'{ping} is officially infected. Feel free to stay away from them and {total - 1} more.',
+            f"Ya know, shaming someone for being sick isn't very nice. Protect {ping} and their {total - 1} friends.",
             f"Unfortunately {ping} has fallen ill. Get well soon. Oh and {total} infected so far.",
             f'"from:{ping} infected" might bring up some interesting results <:rooThink:596576798351949847> ({total} infected)',
         ]
@@ -720,7 +725,6 @@ class Virus(commands.Cog):
         except discord.HTTPException:
             return
 
-
         try:
             await self.log_channel.send(f'{ping} has been cured! Amazing. {total} cured so far.')
         except discord.HTTPException:
@@ -735,7 +739,8 @@ class Virus(commands.Cog):
             return
 
         try:
-            await self.log_channel.send(f'{ping} is now a healer...? Wonder what that means. Rather rare, only {total} of them.')
+            await self.log_channel.send(
+                f'{ping} is now a healer...? Wonder what that means. Rather rare, only {total} of them.')
         except discord.HTTPException:
             pass
 
@@ -748,7 +753,8 @@ class Virus(commands.Cog):
             return
 
         try:
-            await self.log_channel.send(f'{ping} is no longer a healer due to a fatal accident. Only {total} remain now.')
+            await self.log_channel.send(
+                f'{ping} is no longer a healer due to a fatal accident. Only {total} remain now.')
         except discord.HTTPException:
             pass
 
@@ -968,7 +974,7 @@ class Virus(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    async def process_state(self, state, user, *, member=None, cause=None):
+    async def process_state(self, state, user, *, member = None, cause = None):
         if state is State.dead:
             if cause is not None:
                 data = self.storage['stats'].people_killed
@@ -1137,7 +1143,7 @@ class Virus(commands.Cog):
                 to_send.append(f'<#{channel_id}>: 0')
             else:
                 total = sum(p.sickness_rate for p in authors) / len(authors)
-                to_send.append(f'<#{channel_id}>: {total/1000:.3%}')
+                to_send.append(f'<#{channel_id}>: {total / 1000:.3%}')
 
         await ctx.send('\n'.join(to_send))
 
@@ -1156,21 +1162,25 @@ class Virus(commands.Cog):
 
         infected = sorted((p for p in participants if p.is_infectious()), key=lambda p: p.sickness, reverse=True)
         most_sick = '\n'.join(f'{i + 1}) <@{p.member_id}> [{p.sickness}]' for i, p in enumerate(infected[:5]))
-        least_sick = '\n'.join(f'{i + 1}) <@{p.member_id}> [{p.sickness}]' for i, p in enumerate(reversed(infected[-5:])))
+        least_sick = '\n'.join(
+            f'{i + 1}) <@{p.member_id}> [{p.sickness}]' for i, p in enumerate(reversed(infected[-5:])))
 
         e.add_field(name='Most Sick', value=most_sick or 'No one')
         e.add_field(name='Least Sick', value=least_sick or 'No one')
 
         most_cured = Counter(stats.people_cured)
-        most_cured = '\n'.join(f'{i + 1}) <@{m}> {total} cured' for (i, (m, total)) in enumerate(most_cured.most_common(5)))
+        most_cured = '\n'.join(
+            f'{i + 1}) <@{m}> {total} cured' for (i, (m, total)) in enumerate(most_cured.most_common(5)))
         e.add_field(name='Top Curers', value=most_cured or 'No one', inline=False)
 
         most_infected = Counter(stats.people_infected)
-        most_infected = '\n'.join(f'{i + 1}) <@{m}> {total} infected' for (i, (m, total)) in enumerate(most_infected.most_common(5)))
+        most_infected = '\n'.join(
+            f'{i + 1}) <@{m}> {total} infected' for (i, (m, total)) in enumerate(most_infected.most_common(5)))
         e.add_field(name='Most Contagious', value=most_infected or 'No one')
 
         top_killers = Counter(stats.people_killed)
-        top_killers = '\n'.join(f'{i + 1}) <@{m}> {total} killed' for (i, (m, total)) in enumerate(top_killers.most_common(5)))
+        top_killers = '\n'.join(
+            f'{i + 1}) <@{m}> {total} killed' for (i, (m, total)) in enumerate(top_killers.most_common(5)))
         e.add_field(name='Top Killers', value=top_killers or 'No one')
 
         await ctx.send(embed=e)
@@ -1278,7 +1288,9 @@ class Virus(commands.Cog):
         item.total = 10
         item.unlocked = True
         await self.storage.save()
-        await self.log_channel.send(f'\N{CHEERING MEGAPHONE} {ctx.author.mention} seems to have found a cure? Check the store')
+        await self.log_channel.send(
+            f'\N{CHEERING MEGAPHONE} {ctx.author.mention} seems to have found a cure? Check the store')
+
 
 def setup(bot):
     bot.add_cog(Virus(bot))
