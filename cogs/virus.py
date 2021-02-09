@@ -1276,7 +1276,7 @@ class Virus(commands.Cog):
 
         item = discord.utils.get(self.storage['store'], emoji='\N{SYRINGE}')
         if item is None:
-            return await ctx.send('Tell Danny this happened?')
+            return await ctx.send('Tell eek this happened?')
 
         if item.in_stock:
             return await ctx.send('Hey, we already have some vaccines in stock right now.')
