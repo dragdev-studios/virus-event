@@ -32,10 +32,12 @@ class HelpCommand(commands.HelpCommand):
 
 class EventBot(commands.Bot):
     def __init__(self):
-        super().__init__(help_command=HelpCommand(), command_prefix=commands.when_mentioned_or('e!'))
+        super().__init__(help_command=HelpCommand(), command_prefix=commands.when_mentioned_or('e!'),
+                         intents=discord.Intents.all())
         self.uptime = None
         self.load_extension('cogs.admin')
         self.load_extension('cogs.virus')
+        self.load_extension("jishaku")
 
     def run(self):
         super().run(config.token)

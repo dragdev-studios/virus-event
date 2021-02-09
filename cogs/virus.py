@@ -15,16 +15,16 @@ import enum
 
 from .utils import storage, formats
 
-GENERAL_ID = 336642776609456130
-SNAKE_PIT_ID = 448285120634421278
-TESTING_ID = 381963689470984203
+GENERAL_ID = 706271127542038611
+SNAKE_PIT_ID = 706273466776813573
+TESTING_ID = 706301766832095312
 EVENT_ID = 674833398744743936
-INFECTED_ROLE_ID = 674811235190964235
-HEALER_ROLE_ID = 674838998736437248
-DISCORD_PY = 336642139381301249
+INFECTED_ROLE_ID = 808745075701710858
+HEALER_ROLE_ID = 808745162364157982
+DISCORD_PY = 706271127542038608
 MOD_TESTING_ID = 568662293190148106
 MAX_ALLOWED_HEALS = 3
-MAX_VACCINE = 25
+MAX_VACCINE = 50
 VACCINE_MILESTONES = (5, 10, 15, 20, MAX_VACCINE)
 
 # GENERAL_ID = 182325885867786241
@@ -382,7 +382,11 @@ class VirusStorageHook(storage.StorageHook):
             return Stats(**data)
 
 class Virus(commands.Cog):
-    """The discord.py virus has spread and needs to be contained \N{FACE SCREAMING IN FEAR}"""
+    """The yourapps virus has spread and needs to be contained \N{FACE SCREAMING IN FEAR}
+
+    This is a cloned bot from the discord.py virus event, which you can find here: https://github.com/Rapptz/discord-event-bot
+    Have fun!
+    """
 
     def __init__(self, bot):
         self.bot = bot
@@ -393,6 +397,11 @@ class Virus(commands.Cog):
         self._shop_restocking = False
         self._timer_has_data = asyncio.Event()
         self._task = bot.loop.create_task(self.day_cycle())
+#        self.log_channel = None
+        self.bot.loop.create_task(self.init())
+
+    async def init(self):
+        self.log_channel = await self.bot.fetch_channel(706301766832095312)
 
     def cog_unload(self):
         self._task.cancel()

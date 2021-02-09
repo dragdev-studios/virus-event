@@ -1,0 +1,13 @@
+[2021-02-09 17:32:51] [ERROR  ] asyncio: Task exception was never retrieved
+future: <Task finished name='Task-2' coro=<Virus.init() done, defined at /home/eek/Bots/virus/cogs/virus.py:403> exception=AttributeError("'NoneType' object has no attribute 'request'")>
+Traceback (most recent call last):
+  File "/home/eek/Bots/virus/cogs/virus.py", line 404, in init
+    self.log_channel = await self.bot.fetch_channel(706301766832095312)
+  File "/usr/local/lib/python3.9/site-packages/discord/client.py", line 1457, in fetch_channel
+    data = await self.http.get_channel(channel_id)
+  File "/usr/local/lib/python3.9/site-packages/discord/http.py", line 185, in request
+    async with self.__session.request(method, url, **kwargs) as r:
+AttributeError: 'NoneType' object has no attribute 'request'
+[2021-02-09 17:32:51] [INFO   ] discord.client: logging in using static token
+[2021-02-09 17:32:52] [INFO   ] discord.gateway: Shard ID None has sent the IDENTIFY payload.
+[2021-02-09 17:32:52] [INFO   ] discord.gateway: Shard ID None has connected to Gateway: ["gateway-prd-main-ktwx",{"micros":99387,"calls":["discord-sessions-prd-2-104",{"micros":94738,"calls":["start_session",{"micros":52675,"calls":["api-prd-main-54kj",{"micros":47444,"calls":["get_user",{"micros":4673},"add_authorized_ip",{"micros":1711},"get_guilds",{"micros":7196},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":2,"calls":[]},"presence_connect",{"micros":27564,"calls":[]}]}]}] (Session ID: 2f0fe87190350e6f8315b5ccaf2e1512).
