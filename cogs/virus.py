@@ -234,7 +234,7 @@ class Participant:
 
     def heal(self, other):
         if self.is_dead():
-            raise VirusError('<:rooThink:596576798351949847>')
+            raise VirusError('<:thonk:735191246435254273>')
 
         if other.is_dead():
             raise VirusError("I'm afraid they're already dead.")
@@ -683,7 +683,7 @@ class Virus(commands.Cog):
             return
 
         dialogue = [
-            f'A moment silence for {ping} <:rooBless:597589960270544916> (by the way, {total} dead so far)',
+            f'A moment silence for {ping} \u0001faa6 (by the way, {total} dead so far)',
             f"Some people die, some people live, others just disappear altogether. One thing is certain: {ping} isn't alive. Oh also, {total} dead so far.",
             f"Got a letter saying that {ping} isn't with us anymore. Can you believe we have {total} dead to this thing?",
             f"Uh.. {ping} died? I don't even know who {ping} is lol. Well anyway that's {total} dead.",
@@ -709,7 +709,7 @@ class Virus(commands.Cog):
             f'{ping} is officially infected. Feel free to stay away from them and {total - 1} more.',
             f"Ya know, shaming someone for being sick isn't very nice. Protect {ping} and their {total - 1} friends.",
             f"Unfortunately {ping} has fallen ill. Get well soon. Oh and {total} infected so far.",
-            f'"from:{ping} infected" might bring up some interesting results <:rooThink:596576798351949847> ({total} infected)',
+            f'"from:{ping} infected" might bring up some interesting results <:thonk:735191246435254273> ({total} infected)',
         ]
 
         try:
@@ -846,7 +846,7 @@ class Virus(commands.Cog):
         if item is None:
             dialogue = [
                 "It's {current_year} and we still don't know how to use emoji lol",
-                "Hmm.. what are you buying? <:rooThink:596576798351949847>",
+                "Hmm.. what are you buying? <:thonk:735191246435254273>",
                 "You look around the room. Countless people staring at your mistake. You leave in silence.",
             ]
             return await ctx.send(random.choice(dialogue))
