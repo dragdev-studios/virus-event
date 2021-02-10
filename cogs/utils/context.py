@@ -6,11 +6,11 @@ import io
 class Context(commands.Context):
     def tick(self, opt, label=None):
         lookup = {
-            True: '<:greenTick:596576670815879169>',
-            False: '<:redTick:596576672149667840>',
-            None: '<:greyTick:596576672900186113>',
+            True: '\N{white heavy check mark}',
+            False: '\N{cross mark}',
+            None: '\U00002754',
         }
-        emoji = lookup.get(opt, '<:redTick:596576672149667840>')
+        emoji = lookup.get(opt, '\N{cross mark}')
         if label is not None:
             return f'{emoji}: {label}'
         return emoji
@@ -33,7 +33,7 @@ class Context(commands.Context):
         if len(content) > 2000:
             fp = io.BytesIO(content.encode())
             kwargs.pop('file', None)
-            return await self.send(file=discord.File(fp, filename='message_too_long.txt'), **kwargs)
+            return await self.send(file=discord.File(fp, filename='message.txt'), **kwargs)
         else:
             return await self.send(content)
 

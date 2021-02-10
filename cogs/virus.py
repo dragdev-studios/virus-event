@@ -1037,19 +1037,19 @@ class Virus(commands.Cog):
             uses = user.backpack[emoji]
         except KeyError:
             dialogue = [
-                "Buddy ya think this item exists or you have it? <:notlikeblob:597590860623773696>",
-                "I don't know where you've heard of such items <:whenyahomiesaysomewildshit:596577153135673344>",
-                "They told me this item doesn't exist bro. Run along now <:blobsweats:596577181518266378>",
+                "Buddy ya think this item exists or you have it? ",
+                "I don't know where you've heard of such items ",
+                "They told me this item doesn't exist bro. Run along now ",
                 f"Yeah right, as if {discord.utils.escape_mentions(emoji)} isn't a figment of your imagination"
             ]
             return await ctx.send(random.choice(dialogue))
 
         if uses == 0:
-            return await ctx.send("Uh I don't think this item can be used...")
+            return await ctx.send("Uh I don't think this item can be used... You used it already?")
 
         item = discord.utils.get(self.storage['store'], emoji=emoji)
         if item is None:
-            return await ctx.send('Uh... if this happens tell Danny since this is pretty weird.')
+            return await ctx.send('Uh... if this happens tell eek since this is pretty weird.')
 
         if not item.usable_by(user):
             return await ctx.send("Can't let you do that chief.")
@@ -1123,6 +1123,7 @@ class Virus(commands.Cog):
                 await self.send_healer_message(user)
         elif ctx.invoked_with == 'kill':
             await self.kill(user)
+        await ctx.react_tick(True)
 
     @gm.command(name='items')
     async def gm_items(self, ctx):
@@ -1214,7 +1215,7 @@ class Virus(commands.Cog):
         """Hugs a member."""
 
         if ctx.author.id == member.id or member.id == ctx.me.id:
-            return await ctx.send('<:rooThink:596576798351949847>')
+            return await ctx.send('<:thonk:735191246435254273>')
 
         user = await self.get_participant(ctx.author.id)
         other = await self.get_participant(member.id)
@@ -1251,7 +1252,6 @@ class Virus(commands.Cog):
             (2, "Aw isn't that cute. You hugged someone!"),
             (4, "Alright alright you got your hug now scram"),
             (1, "*shudders*"),
-            (3, "<:pepoS:596577130893279272>"),
         ]
         await ctx.send(weighted_random(dialogue))
 
@@ -1272,7 +1272,9 @@ class Virus(commands.Cog):
         }
 
         if len(items - set(user.backpack)) != 0:
-            return await ctx.send('You do not have the requirements to do this.')
+            nl = "\n"
+            return await ctx.send('You do not have the requirements to do this. You need the following items:\n'
+                                  f'{nl.join(items)}')
 
         item = discord.utils.get(self.storage['store'], emoji='\N{SYRINGE}')
         if item is None:

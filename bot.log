@@ -1,4 +1,4 @@
-[2021-02-09 18:08:27] [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
-[2021-02-09 18:08:28] [INFO   ] discord.client: logging in using static token
-[2021-02-09 18:08:28] [INFO   ] discord.gateway: Shard ID None has sent the IDENTIFY payload.
-[2021-02-09 18:08:28] [INFO   ] discord.gateway: Shard ID None has connected to Gateway: ["gateway-prd-main-c00x",{"micros":86675,"calls":["discord-sessions-prd-2-46",{"micros":83618,"calls":["start_session",{"micros":53126,"calls":["api-prd-main-2clw",{"micros":49520,"calls":["get_user",{"micros":17456},"add_authorized_ip",{"micros":1720},"get_guilds",{"micros":12713},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":13924,"calls":[]}]}]}] (Session ID: e2b936f5dd6a621fa1a343fd1308fa56).
+[2021-02-09 18:38:40] [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2021-02-09 18:38:40] [INFO   ] discord.client: logging in using static token
+[2021-02-09 18:38:41] [INFO   ] discord.gateway: Shard ID None has sent the IDENTIFY payload.
+[2021-02-09 18:38:41] [INFO   ] discord.gateway: Shard ID None has connected to Gateway: ["gateway-prd-main-pt2c",{"micros":66842,"calls":["discord-sessions-prd-2-104",{"micros":62886,"calls":["start_session",{"micros":55985,"calls":["api-prd-main-qjjl",{"micros":49908,"calls":["get_user",{"micros":5527},"add_authorized_ip",{"micros":2905},"get_guilds",{"micros":9195},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":2782,"calls":[]}]}]}] (Session ID: f61d765f2442010af510d74662d915fa).
