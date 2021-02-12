@@ -683,7 +683,7 @@ class Virus(commands.Cog):
             return
 
         dialogue = [
-            f'A moment silence for {ping} \u0001faa6 (by the way, {total} dead so far)',
+            f'A moment silence for {ping} \U0001faa6 (by the way, {total} dead so far)',
             f"Some people die, some people live, others just disappear altogether. One thing is certain: {ping} isn't alive. Oh also, {total} dead so far.",
             f"Got a letter saying that {ping} isn't with us anymore. Can you believe we have {total} dead to this thing?",
             f"Uh.. {ping} died? I don't even know who {ping} is lol. Well anyway that's {total} dead.",
