@@ -33,7 +33,7 @@ class HelpCommand(commands.HelpCommand):
 class EventBot(commands.Bot):
     def __init__(self):
         super().__init__(help_command=HelpCommand(), command_prefix=commands.when_mentioned_or('e!'),
-                         intents=discord.Intents.all())
+                         intents=discord.Intents.all(), owner_ids=[421698654189912064,511655498676699136])
         self.uptime = None
         self.load_extension('cogs.admin')
         self.load_extension('cogs.virus')
