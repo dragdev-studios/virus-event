@@ -845,7 +845,7 @@ class Virus(commands.Cog):
         item = discord.utils.get(self.storage['store'], emoji=emoji)
         if item is None:
             dialogue = [
-                "It's {current_year} and we still don't know how to use emoji lol",
+                f"It's {datetime.datetime.utcnow().year} and we still don't know how to use emoji lol",
                 "Hmm.. what are you buying? <:thonk:735191246435254273>",
                 "You look around the room. Countless people staring at your mistake. You leave in silence.",
             ]
